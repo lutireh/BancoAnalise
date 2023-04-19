@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClienteDAO extends DAO{
-     private static ClienteDAO instance;
+    
+    private static ClienteDAO instance;
     
     private ClienteDAO(){
         getConnection();
@@ -92,7 +93,6 @@ public class ClienteDAO extends DAO{
      
      public void delete(Cliente cliente) {
         PreparedStatement pstm;
-
         try {
             pstm = DAO.getConnection().prepareStatement("DELETE FROM cliente WHERE id = ?");
             pstm.setInt(1, cliente.getId());
