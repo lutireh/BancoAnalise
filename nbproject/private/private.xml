@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/ClienteDAO.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/ClienteView.java</file>
             <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/DAO.java</file>
-            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/Cliente.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/AcoesView.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/ContaComumView.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/ContaPoupancaView.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/ContaEspecialView.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/ContaEspecial.java</file>
         </group>
     </open-files>
 </project-private>
