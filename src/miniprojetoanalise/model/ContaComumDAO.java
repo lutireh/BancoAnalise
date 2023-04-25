@@ -82,7 +82,7 @@ public class ContaComumDAO extends DAO{
              pstm.setString(1,contaComum.getDataAbertura());
              pstm.setFloat(2,contaComum.getSaldo());
              pstm.setFloat(3,contaComum.getLimiteValor());
-             pstm.setInt(4,contaComum.getidCliente());
+             pstm.setInt(4,contaComum.getIdCliente());
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

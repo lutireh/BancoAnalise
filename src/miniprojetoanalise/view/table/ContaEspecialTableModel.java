@@ -4,14 +4,15 @@ package miniprojetoanalise.view.table;
 import java.util.List;
 import miniprojetoanalise.model.Cliente;
 import miniprojetoanalise.model.ClienteDAO;
-import miniprojetoanalise.model.ContaComum;
-import miniprojetoanalise.model.ContaComumDAO;
+import miniprojetoanalise.model.ContaEspecial;
+import miniprojetoanalise.model.ContaEspecialDAO;
 
-public class ContaComumTableModel extends GenericTableModel{
+public class ContaEspecialTableModel extends GenericTableModel{
     
-    public ContaComumTableModel(List vDados){
-        super (vDados, new String[]{"DataAbertura","Saldo","LimiteValor","Cliente"});
+    public ContaEspecialTableModel(List vDados){
+        super(vDados, new String[]{"DataAbertura","Saldo","LimiteValor","LimiteCredito","Cliente"});
     }
+    
     
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -24,56 +25,57 @@ public class ContaComumTableModel extends GenericTableModel{
                 return String.class;
             case 3:
                 return String.class;
+            case 4:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }
     
-     @Override
+    
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ContaComum contaComum = (ContaComum) vDados.get(rowIndex);
+        ContaEspecial contaEspecial = (ContaEspecial) vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return contaComum.getDataAbertura();
+                return contaEspecial.getDataAbertura();
             case 1:
-                return contaComum.getSaldo();  
+                return contaEspecial.getSaldo();  
             case 2:
-                return contaComum.getLimiteValor(); 
+                return contaEspecial.getLimiteValor(); 
             case 3:
-               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaComum.getIdCliente());
+                return contaEspecial.getLimiteCredito();
+            case 4:
+               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaEspecial.getidCliente());
                if(cliente != null){
                    return cliente.getNome();
                } else return "";
-             default:
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
-        }        
-    }
-    
-     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        ContaComum contaComum = (ContaComum) vDados.get(rowIndex);
-
-        switch (columnIndex) {
-            case 0:
-                contaComum.setDataAbertura((String) aValue);
-                break;
-            case 1:
-                contaComum.setSaldo((Float) aValue);
-                break;
-            case 2:
-                contaComum.setLimiteValor((Float) aValue);
-                break;
-            case 3:
-                contaComum.setIdCliente((int) aValue);
-                break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
-
         }
-
-        ContaComumDAO.getInstance().update(contaComum);
+    }  
+    
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+         ContaEspecial contaEspecial = (ContaEspecial) vDados.get(rowIndex);
+         switch(columnIndex) {
+            case 0:
+                contaEspecial.setDataAbertura((String) aValue);
+                break;
+            case 1:
+                contaEspecial.setSaldo((Float) aValue);  
+            case 2:
+                contaEspecial.setLimiteValor((Float) aValue); 
+            case 3:
+                contaEspecial.setLimiteCredito((Float) aValue);
+            case 4:
+                contaEspecial.setIdCliente((int) aValue) ;
+            default:
+                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+         }
+         ContaEspecialDAO.getInstance().update(contaEspecial);
     }
-
+    
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;

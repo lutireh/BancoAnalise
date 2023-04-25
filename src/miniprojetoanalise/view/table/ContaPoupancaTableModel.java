@@ -4,13 +4,13 @@ package miniprojetoanalise.view.table;
 import java.util.List;
 import miniprojetoanalise.model.Cliente;
 import miniprojetoanalise.model.ClienteDAO;
-import miniprojetoanalise.model.ContaComum;
-import miniprojetoanalise.model.ContaComumDAO;
+import miniprojetoanalise.model.ContaPoupanca;
+import miniprojetoanalise.model.ContaPoupancaDAO;
 
-public class ContaComumTableModel extends GenericTableModel{
-    
-    public ContaComumTableModel(List vDados){
-        super (vDados, new String[]{"DataAbertura","Saldo","LimiteValor","Cliente"});
+public class ContaPoupancaTableModel extends GenericTableModel{
+       
+    public ContaPoupancaTableModel(List vDados){
+        super(vDados, new String[]{"DataAbertura","Saldo","LimiteValor","DataAniverConta","Cliente"});
     }
     
     @Override
@@ -24,6 +24,8 @@ public class ContaComumTableModel extends GenericTableModel{
                 return String.class;
             case 3:
                 return String.class;
+            case 4:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -31,49 +33,47 @@ public class ContaComumTableModel extends GenericTableModel{
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ContaComum contaComum = (ContaComum) vDados.get(rowIndex);
+        ContaPoupanca contaPoupanca = (ContaPoupanca) vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return contaComum.getDataAbertura();
+                return contaPoupanca.getDataAbertura();
             case 1:
-                return contaComum.getSaldo();  
+                return contaPoupanca.getSaldo();  
             case 2:
-                return contaComum.getLimiteValor(); 
+                return contaPoupanca.getLimiteValor(); 
             case 3:
-               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaComum.getIdCliente());
+                return contaPoupanca.getDataAniverConta();
+            case 4:
+               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaPoupanca.getidCliente());
                if(cliente != null){
                    return cliente.getNome();
                } else return "";
-             default:
+            default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
-        }        
+        }
     }
     
      @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        ContaComum contaComum = (ContaComum) vDados.get(rowIndex);
-
-        switch (columnIndex) {
+         ContaPoupanca contaPoupanca = (ContaPoupanca) vDados.get(rowIndex);
+         switch(columnIndex) {
             case 0:
-                contaComum.setDataAbertura((String) aValue);
+                contaPoupanca.setDataAbertura((String) aValue);
                 break;
             case 1:
-                contaComum.setSaldo((Float) aValue);
-                break;
+                contaPoupanca.setSaldo((Float) aValue);  
             case 2:
-                contaComum.setLimiteValor((Float) aValue);
-                break;
+                contaPoupanca.setLimiteValor((Float) aValue); 
             case 3:
-                contaComum.setIdCliente((int) aValue);
-                break;
+                contaPoupanca.setDataAniverConta((int) aValue);
+            case 4:
+                contaPoupanca.setIdCliente((int) aValue) ;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
-
-        }
-
-        ContaComumDAO.getInstance().update(contaComum);
+         }
+         ContaPoupancaDAO.getInstance().update(contaPoupanca);
     }
-
+    
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;

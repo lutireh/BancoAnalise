@@ -3,6 +3,7 @@ package miniprojetoanalise.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import miniprojetoanalise.model.Cliente;
 import miniprojetoanalise.model.ClienteDAO;
@@ -16,24 +17,30 @@ import miniprojetoanalise.view.table.GenericTableModel;
 
 public class Controller {
     private static List<Cliente> cliente = new ArrayList<>();
-    private static List<ContaComum> contaComum = new ArrayList<>();
-    private static List<ContaEspecial> contaEspecial = new ArrayList<>();
-    private static List<ContaPoupanca> contaPoupanca = new ArrayList<>();
-
-    private static Cliente getCliente (int id){
+    
+    public static void initializeComboBox(JComboBox combo, String type){
+        combo.removeAllItems();
+        if(type.equals("Cliente")){
+            setComboBox(combo, ClienteDAO.getInstance().retrieveAll(),type);
+        }
+    }
+    
+    private static void setComboBox(JComboBox combo, List<Object> objs,String type){
+        switch (type) {
+           case "Cliente":
+               cliente.clear();
+               for ( Object obj: objs){
+                   combo.addItem(((Cliente)obj).getNome());
+                   cliente.add((Cliente) obj);
+               }
+               break;
+             default:
+               break;
+        }
+    }
+    
+    public static Cliente getCliente (int id){
         return cliente.get(id);
-    }
-    
-    private static ContaComum getContaComum (int id) {
-        return contaComum.get(id);
-    }
-    
-    private static ContaEspecial getContaEspecial (int id) {
-        return contaEspecial.get(id);
-    }
-    
-    private static ContaPoupanca getContaPoupanca (int id) {
-        return contaPoupanca.get(id);
     }
     
     private static Cliente selectedCliente = null;
@@ -92,22 +99,22 @@ public class Controller {
         }
     }
     
-    public void deletarCliente (JTable table) {
+    public static void deletarCliente (JTable table) {
         ClienteDAO.getInstance().delete(selectedCliente);
         ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
     }
     
-    public void deletarContaComum (JTable table) {
+    public static void deletarContaComum (JTable table) {
         ContaComumDAO.getInstance().delete(selectedContaComum);
         ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
     }
     
-    public void deletarContaEspecial (JTable table) {
+    public static void deletarContaEspecial (JTable table) {
         ContaEspecialDAO.getInstance().delete(selectedContaEspecial);
         ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
     }
     
-    public void deletarContaPoupanca (JTable table) {
+    public static void deletarContaPoupanca (JTable table) {
         ContaPoupancaDAO.getInstance().delete(selectedContaPoupanca);
         ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
     }

@@ -8,7 +8,7 @@ import miniprojetoanalise.model.ClienteDAO;
 public class ClienteTableModel extends GenericTableModel{
     
     public ClienteTableModel(List vDados){
-        super (vDados, new String[]{"nome","cpf","dataNascimento"});
+        super (vDados, new String[]{"Nome","CPF","DataNascimento"});
     }
     
     @Override
@@ -20,9 +20,7 @@ public class ClienteTableModel extends GenericTableModel{
                 return String.class;
             case 2:
                 return String.class;
-            case 3:
-                return String.class;
-                 default:
+            default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }

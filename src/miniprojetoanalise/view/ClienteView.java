@@ -1,10 +1,24 @@
 
 package miniprojetoanalise.view;
 
-public class ClienteView extends javax.swing.JFrame {
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import miniprojetoanalise.controller.Controller;
+import miniprojetoanalise.model.Cliente;
+import miniprojetoanalise.model.ClienteDAO;
+import miniprojetoanalise.view.table.ClienteTableModel;
+import miniprojetoanalise.view.table.GenericTableModel;
 
+public class ClienteView extends javax.swing.JFrame {
+    private void initMyComponents() {
+        Controller.setTableModel(jTable2, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
+    }
+    
     public ClienteView() {
         initComponents();
+        this.initMyComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
@@ -100,12 +114,23 @@ public class ClienteView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel5.setText("Busca por CPF");
+
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -119,6 +144,11 @@ public class ClienteView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextPane1);
 
         jButton2.setText("Excluir");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
 
         jTextPane3.setEditable(false);
         jTextPane3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -290,7 +320,7 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        ContaEspecialView contaEspecial = new ContaEspecialView();
+       ContaEspecialView contaEspecial = new ContaEspecialView();
        contaEspecial.show();
     }//GEN-LAST:event_jMenu5MouseClicked
 
@@ -300,9 +330,25 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       model.Cliente cli = Controller.criarCliente(jTextField1.getText(),jTextField3.getText(),jTextField2.getText())
-       
+       Cliente cli = Controller.criarCliente(jTextField1.getText(),jTextField3.getText(),jTextField2.getText());
+       if (cli != null) {
+            JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso!");
+       } else {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar","Erro",JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        Controller.setTableModel(jTable2, new ClienteTableModel(ClienteDAO.getInstance().retrieveByCpf(jTextField4.getText())));
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        Controller.deletarCliente(jTable2);
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+       Controller.setSelected(((GenericTableModel) jTable2.getModel()).getItem(jTable2.getSelectedRow()));
+    }//GEN-LAST:event_jTable2MousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

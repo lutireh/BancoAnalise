@@ -16,6 +16,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu17MouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu18">
           <Properties>
@@ -26,16 +29,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conta Comum"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu19MouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu20">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conta Poupan&#xe7;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu20MouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu21">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conta Especial"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu21MouseClicked"/>
+              </Events>
             </Menu>
           </SubComponents>
         </Menu>

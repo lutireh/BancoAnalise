@@ -44,7 +44,7 @@ public class ContaComum {
         this.limiteValor = limiteValor;
     }
     
-    public int getidCliente(){
+    public int getIdCliente(){
         return idCliente;
     }
     
