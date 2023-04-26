@@ -12,17 +12,23 @@ import miniprojetoanalise.model.ContaComumDAO;
 import miniprojetoanalise.model.ContaEspecial;
 import miniprojetoanalise.model.ContaEspecialDAO;
 import miniprojetoanalise.model.ContaPoupanca;
+
 import miniprojetoanalise.model.ContaPoupancaDAO;
 import miniprojetoanalise.view.table.GenericTableModel;
 
 public class Controller {
     private static List<Cliente> cliente = new ArrayList<>();
+    //fazer uma lista de contas com todas ???? para utilizar nos combo box de ações
     
     public static void initializeComboBox(JComboBox combo, String type){
         combo.removeAllItems();
         if(type.equals("Cliente")){
             setComboBox(combo, ClienteDAO.getInstance().retrieveAll(),type);
+         }
+        if(type.equals("ContaComum")){
+            setComboBox(combo,ContaComumDAO.getInstance().retrieveByClientCpf(selectedCliente.getCpf()),type);
         }
+       
     }
     
     private static void setComboBox(JComboBox combo, List<Object> objs,String type){
@@ -31,6 +37,13 @@ public class Controller {
                cliente.clear();
                for ( Object obj: objs){
                    combo.addItem(((Cliente)obj).getNome());
+                   cliente.add((Cliente) obj);
+               }
+               break;
+            case "ContaComum":
+               cliente.clear();
+               for ( Object obj: objs){
+                   combo.addItem(((ContaComum)obj).getId());
                    cliente.add((Cliente) obj);
                }
                break;

@@ -5,8 +5,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DAO {
-    public static final String DBURL = "jdbc:sqlite:miniprojetoanalise.db";//completar link banco
+public abstract class DAO {
+    public static final String DBURL = "jdbc:sqlite:banco.db";//completar link banco
      private static Connection con;
      
      public static Connection getConnection(){
