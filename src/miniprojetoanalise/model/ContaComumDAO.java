@@ -79,7 +79,7 @@ public class ContaComumDAO extends DAO{
         return this.retrieve("SELECT * FROM cliente WHERE nome LIKE '%" + cpf + "%'");
     }
     
-    public void update(ContaComum contaComum){
+    public boolean update(ContaComum contaComum){
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaComum SET" 
@@ -91,8 +91,10 @@ public class ContaComumDAO extends DAO{
              pstm.setInt(4,contaComum.getIdCliente());
              pstm.setInt(5,contaComum.getId());
              executeUpdate(pstm);
+             return true;
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
+            return false;
         }
     }
     public void delete(ContaComum contaComum) {

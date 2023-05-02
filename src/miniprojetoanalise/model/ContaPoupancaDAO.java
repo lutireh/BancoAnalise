@@ -82,7 +82,7 @@ public class ContaPoupancaDAO extends DAO{
     }
     
     
-    public void update(ContaPoupanca contaPoupanca){
+    public boolean update(ContaPoupanca contaPoupanca){
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaPoupanca SET" 
@@ -94,9 +94,11 @@ public class ContaPoupancaDAO extends DAO{
              pstm.setInt(4,contaPoupanca.getDataAniverConta());
              pstm.setInt(5,contaPoupanca.getIdCliente());
              pstm.setInt(6,contaPoupanca.getId());
-             executeUpdate(pstm);             
+             executeUpdate(pstm);   
+             return true;
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
+            return false;
         }
     }
     public void delete(ContaPoupanca contaPoupanca) {

@@ -81,7 +81,7 @@ public class ContaEspecialDAO extends DAO{
         return contasComuns;
     }
     
-    public void update(ContaEspecial contaEspecial){
+    public boolean update(ContaEspecial contaEspecial){
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaEspecial SET" 
@@ -94,8 +94,10 @@ public class ContaEspecialDAO extends DAO{
              pstm.setInt(5,contaEspecial.getIdCliente());
              pstm.setInt(6, contaEspecial.getId());
              executeUpdate(pstm);
+             return true;
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
+            return false;
         }
     }
     public void delete(ContaEspecial contaEspecial) {

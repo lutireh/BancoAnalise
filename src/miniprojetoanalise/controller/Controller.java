@@ -4,6 +4,7 @@ package miniprojetoanalise.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import miniprojetoanalise.model.Cliente;
 import miniprojetoanalise.model.ClienteDAO;
@@ -31,13 +32,13 @@ public class Controller {
             setSelected(cliente.get(0));
         }
         else if(type.equals("ContaComum")){
-            setComboBox(combo,ContaComumDAO.getInstance().retrieveAllById(selectedCliente.getId()),type);
+            setComboBox(combo,ContaComumDAO.getInstance().retrieveAll(),type);
         }
         else if(type.equals("ContaEspecial")){
-            setComboBox(combo,ContaEspecialDAO.getInstance().retrieveAllById(selectedCliente.getId()),type);
+            setComboBox(combo,ContaEspecialDAO.getInstance().retrieveAll(),type);
         }
         else if(type.equals("ContaPoupanca")){
-            setComboBox(combo,ContaPoupancaDAO.getInstance().retrieveAllById(selectedCliente.getId()),type);
+            setComboBox(combo,ContaPoupancaDAO.getInstance().retrieveAll(),type);
         }
         else if(type.equals("TipoConta")){
             setComboBox(combo,new ArrayList<>(List.of("Conta Comum","Conta Especial","Conta Poupança")) ,"TipoConta");
@@ -152,10 +153,10 @@ public class Controller {
             }
          switch (type) {
             case "Cliente":
-               selectedCliente = cliente.get(index);
+                selectedCliente = cliente.get(index);
             break;
             case "Conta Comum":
-                    selectedContaComum = contaComum.get(index);
+                selectedContaComum = contaComum.get(index);
             break;
             case "Conta Especial":
                 selectedContaEspecial = contaEspecial.get(index);
@@ -209,43 +210,86 @@ public class Controller {
     }
     
     public static void depositarContaComum (float valor){
-        selectedContaComum.depositar(valor);
-        System.out.println(selectedContaComum.getSaldo());
-        ContaComumDAO.getInstance().update(selectedContaComum);
+        if(selectedContaComum.depositar(valor)){
+            System.out.println(selectedContaComum.getSaldo());
+            if(ContaComumDAO.getInstance().update(selectedContaComum)){
+              JOptionPane.showMessageDialog(null,"Deposito realizado com sucesso!");
+            }  else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public static void depositarContaEspecial (float valor){
-        selectedContaEspecial.depositar(valor);
-        System.out.println(selectedContaEspecial.getSaldo());
-        ContaEspecialDAO.getInstance().update(selectedContaEspecial);
+        if(selectedContaEspecial.depositar(valor)){
+            System.out.println(selectedContaEspecial.getSaldo());
+            if(ContaEspecialDAO.getInstance().update(selectedContaEspecial)){
+                JOptionPane.showMessageDialog(null,"Deposito realizado com sucesso!");
+            }  else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
         
     public static void depositarContaPoupanca (float valor){       
-        selectedContaPoupanca.depositar(valor);
-        System.out.println(selectedContaPoupanca.getSaldo());
-        ContaPoupancaDAO.getInstance().update(selectedContaPoupanca);
+        if(selectedContaPoupanca.depositar(valor)){
+            System.out.println(selectedContaPoupanca.getSaldo());
+            if(ContaPoupancaDAO.getInstance().update(selectedContaPoupanca)){
+                JOptionPane.showMessageDialog(null,"Deposito realizado com sucesso!");
+            }  else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public static void sacarContaComum (float valor){
-        selectedContaComum.sacar(valor);
-        System.out.println(selectedContaComum.getSaldo());
-        ContaComumDAO.getInstance().update(selectedContaComum);
+        if(selectedContaComum.sacar(valor)){
+            System.out.println(selectedContaComum.getSaldo());
+            if(ContaComumDAO.getInstance().update(selectedContaComum)){
+                JOptionPane.showMessageDialog(null,"Saque realizado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public static void sacarContaEspecial (float valor){
-        selectedContaEspecial.sacar(valor);
-        System.out.println(selectedContaEspecial.getSaldo());
-        ContaEspecialDAO.getInstance().update(selectedContaEspecial);
+        if(selectedContaEspecial.sacar(valor)){
+            System.out.println(selectedContaEspecial.getSaldo());
+            if(ContaEspecialDAO.getInstance().update(selectedContaEspecial)){
+                JOptionPane.showMessageDialog(null,"Saque realizado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+        }  else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
         
-    public static void sacarContaPoupanca (float valor){       
-        selectedContaPoupanca.sacar(valor);
-        System.out.println(selectedContaPoupanca.getSaldo());
-        ContaPoupancaDAO.getInstance().update(selectedContaPoupanca);
+    public static void sacarContaPoupanca (float valor){ 
+        if(selectedContaPoupanca.sacar(valor)){
+           System.out.println(selectedContaPoupanca.getSaldo());
+            if(ContaPoupancaDAO.getInstance().update(selectedContaPoupanca)){
+                JOptionPane.showMessageDialog(null,"Saque realizado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao sacar","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+       }  else {
+           JOptionPane.showMessageDialog(null, "Sem limite","Erro",JOptionPane.ERROR_MESSAGE);
+        }
     }
    
     
-    public static void transferir (float valor,String tipoContaOrigem, String tipoContaDestino){  
+    public static void transferir (float valor, String tipoContaOrigem, String tipoContaDestino){  
+        boolean tranferiu = false;
         Conta transferirDe = null, transferirPara = null;
         switch (tipoContaOrigem) {
             case "Conta Comum":
@@ -277,28 +321,44 @@ public class Controller {
         }
         if(transferirDe != null && transferirPara != null){
             if(transferirDe.sacar(valor)){
-                
                 transferirPara.depositar(valor);
-
                 System.out.println("De Conta:"+transferirDe.getId()+"\nSaldo: "+ transferirDe.getSaldo());
                 System.out.println("Para Conta:"+transferirPara.getId()+"\nSaldo: "+ transferirPara.getSaldo());
-
-               if("Conta Comum".equals(tipoContaOrigem)){
-                    ContaComumDAO.getInstance().update((ContaComum) transferirDe);
-               }else if("Conta Especial".equals(tipoContaOrigem)){
-                    ContaEspecialDAO.getInstance().update((ContaEspecial) transferirDe);
-               }else{
-                    ContaPoupancaDAO.getInstance().update((ContaPoupanca) transferirDe);
-               }
-                if("Conta Comum".equals(tipoContaDestino)){
-                    ContaComumDAO.getInstance().update((ContaComum) transferirPara);
-               }else if("Conta Especial".equals(tipoContaDestino)){
-                    ContaEspecialDAO.getInstance().update((ContaEspecial) transferirPara);
-               }else{
-                    ContaPoupancaDAO.getInstance().update((ContaPoupanca) transferirPara);
-               }
-          }
+                
+                switch (tipoContaOrigem){
+                    case "Conta Comum": 
+                        tranferiu = ContaComumDAO.getInstance().update((ContaComum) transferirDe);
+                    break;
+                    case "Conta Especial":
+                        tranferiu = ContaEspecialDAO.getInstance().update((ContaEspecial) transferirDe);
+                    break;
+                    case "Conta Poupanca":
+                    case "Conta Poupança":
+                       tranferiu = ContaPoupancaDAO.getInstance().update((ContaPoupanca) transferirDe);
+                    break;
+                    default:
+                    break;
+                }
+                switch (tipoContaDestino){
+                    case "Conta Comum": 
+                        tranferiu = ContaComumDAO.getInstance().update((ContaComum) transferirPara);
+                    break;
+                    case "Conta Especial":
+                        tranferiu = ContaEspecialDAO.getInstance().update((ContaEspecial) transferirPara);
+                    break;
+                    case "Conta Poupanca":
+                    case "Conta Poupança":
+                       tranferiu = ContaPoupancaDAO.getInstance().update((ContaPoupanca) transferirPara);
+                    break;
+                    default:
+                    break;
+                }
+                if(tranferiu){
+                    JOptionPane.showMessageDialog(null,"Transferencia realizada com sucesso!");
+               } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao transferir","Erro",JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        
     }
 }

@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package miniprojetoanalise.model;
 
-/**
- *
- * @author Luiza Rehbein
- */
 public abstract class Conta {
     
     protected int id;
@@ -65,10 +58,12 @@ public abstract class Conta {
     }
     
     
-    public void depositar(float valor){
+    public boolean depositar(float valor){
         if( valor > 0) { 
             this.saldo += valor;
+            return true;
         }
+        return false;
     }
     
     protected boolean estaNoLimite(float valor){
