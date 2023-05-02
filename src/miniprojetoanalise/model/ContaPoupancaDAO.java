@@ -76,16 +76,25 @@ public class ContaPoupancaDAO extends DAO{
         return this.retrieve("SELECT * FROM cliente WHERE nome LIKE '%" + cpf + "%'");
     }
     
+    public List retrieveAllById(int id) {
+        List contasComuns = this.retrieve("SELECT * FROM contaPoupanca WHERE idCliente = " + id);
+        return contasComuns;
+    }
+    
+    
     public void update(ContaPoupanca contaPoupanca){
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaPoupanca SET" 
-                     +"dataAbertura = ?, saldo = ?, limiteValor = ?, dataAniverConta = ?, idCliente = ?");
+                     +" dataAbertura = ?, saldo = ?, limiteValor = ?, dataAniverConta = ?, idCliente = ?"
+                     + " where id = ?");
              pstm.setString(1,contaPoupanca.getDataAbertura());
              pstm.setFloat(2,contaPoupanca.getSaldo());
              pstm.setFloat(3,contaPoupanca.getLimiteValor());
              pstm.setInt(4,contaPoupanca.getDataAniverConta());
-             pstm.setInt(5,contaPoupanca.getidCliente());
+             pstm.setInt(5,contaPoupanca.getIdCliente());
+             pstm.setInt(6,contaPoupanca.getId());
+             executeUpdate(pstm);             
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

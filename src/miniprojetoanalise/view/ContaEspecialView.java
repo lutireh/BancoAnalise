@@ -409,7 +409,7 @@ public class ContaEspecialView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable4MousePressed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-       Controller.setSelected(Controller.getCliente(jComboBox1.getSelectedIndex()));
+        Controller.setSelected(Controller.getCliente(jComboBox1.getSelectedIndex()));
         String saldo = jTextField9.getText();
         String limiteValor = jTextField10.getText();
         String limiteCredito = jTextField7.getText();

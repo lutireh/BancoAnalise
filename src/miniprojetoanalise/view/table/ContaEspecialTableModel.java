@@ -46,7 +46,7 @@ public class ContaEspecialTableModel extends GenericTableModel{
             case 3:
                 return contaEspecial.getLimiteCredito();
             case 4:
-               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaEspecial.getidCliente());
+               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaEspecial.getIdCliente());
                if(cliente != null){
                    return cliente.getNome();
                } else return "";

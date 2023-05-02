@@ -62,12 +62,17 @@ public class ContaComumDAO extends DAO{
     }
      
      public List retrieveAll(){
-        return this.retrieve("SELECT * FROM contaComum ");
+        return this.retrieve("SELECT * FROM contaComum");
     }
     
     public ContaComum retrieveById(int id) {
         List<ContaComum> contasComuns = this.retrieve("SELECT * FROM contaComum WHERE id = " + id);
         return (contasComuns.isEmpty() ? null : contasComuns.get(0));
+    }
+    
+    public List retrieveAllById(int id) {
+        List contasComuns = this.retrieve("SELECT * FROM contaComum WHERE idCliente = " + id);
+        return contasComuns;
     }
     
     public List retrieveByClientCpf(String cpf) {
@@ -78,11 +83,14 @@ public class ContaComumDAO extends DAO{
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaComum SET" 
-                     +"dataAbertura = ?, saldo = ?, limiteValor = ?, idCliente = ?");
+                     +" dataAbertura = ?, saldo = ?, limiteValor = ?, idCliente = ? "
+                     + "where id = ?");
              pstm.setString(1,contaComum.getDataAbertura());
              pstm.setFloat(2,contaComum.getSaldo());
              pstm.setFloat(3,contaComum.getLimiteValor());
              pstm.setInt(4,contaComum.getIdCliente());
+             pstm.setInt(5,contaComum.getId());
+             executeUpdate(pstm);
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -96,5 +104,5 @@ public class ContaComumDAO extends DAO{
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
-    }
+    }    
 }

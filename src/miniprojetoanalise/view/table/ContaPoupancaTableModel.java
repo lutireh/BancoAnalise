@@ -44,7 +44,7 @@ public class ContaPoupancaTableModel extends GenericTableModel{
             case 3:
                 return contaPoupanca.getDataAniverConta();
             case 4:
-               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaPoupanca.getidCliente());
+               Cliente cliente = ClienteDAO.getInstance().retrieveById(contaPoupanca.getIdCliente());
                if(cliente != null){
                    return cliente.getNome();
                } else return "";

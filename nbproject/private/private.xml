@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/DAO.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/ContaPoupanca.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/ClienteDAO.java</file>
             <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/view/AcoesView.java</file>
+            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/model/Conta.java</file>
             <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/controller/Controller.java</file>
-            <file>file:/C:/Users/Luiza%20Rehbein/Documents/NetBeansProjects/MiniProjetoAnalise/src/miniprojetoanalise/MiniProjetoAnalise.java</file>
         </group>
     </open-files>
 </project-private>

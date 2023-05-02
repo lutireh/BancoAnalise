@@ -76,16 +76,24 @@ public class ContaEspecialDAO extends DAO{
         return this.retrieve("SELECT * FROM contaEspecial WHERE nome LIKE '%" + cpf + "%'");
     }
     
+    public List retrieveAllById(int id) {
+        List contasComuns = this.retrieve("SELECT * FROM contaEspecial WHERE idCliente = " + id);
+        return contasComuns;
+    }
+    
     public void update(ContaEspecial contaEspecial){
          PreparedStatement pstm;
          try{
              pstm = DAO.getConnection().prepareStatement("UPDATE contaEspecial SET" 
-                     +"dataAbertura = ?, saldo = ?, limiteValor = ?,limiteCredito = ?,  idCliente = ?");
+                     +" dataAbertura = ?, saldo = ?, limiteValor = ?,limiteCredito = ?,  idCliente = ?"
+                     + " where id = ?");
              pstm.setString(1,contaEspecial.getDataAbertura());
              pstm.setFloat(2,contaEspecial.getSaldo());
              pstm.setFloat(3,contaEspecial.getLimiteValor());
              pstm.setFloat(4,contaEspecial.getLimiteCredito());
-             pstm.setInt(5,contaEspecial.getidCliente());
+             pstm.setInt(5,contaEspecial.getIdCliente());
+             pstm.setInt(6, contaEspecial.getId());
+             executeUpdate(pstm);
          }  catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
